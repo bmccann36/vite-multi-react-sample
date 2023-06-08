@@ -1,13 +1,13 @@
-import React, {Suspense, useState} from 'react';
+import React, { Suspense, useState } from 'react';
 
-import {BrowserRouter, Route, Routes} from "react-router-dom";
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 
 // import HomePage from './HomePage';
 // import AboutPage from './AboutPage';
 import ThemeContext from '../../ThemeContext.jsx';
-import HomePage from "./HomePage.jsx";
-import AboutPage from "./AboutPage.jsx";
+import HomePage from './HomePage.jsx';
+import AboutPage from './AboutPage.jsx';
 
 
 export default function App() {
@@ -24,7 +24,7 @@ export default function App() {
   return (
     <BrowserRouter>
       <ThemeContext.Provider value={theme}>
-        <div style={{fontFamily: 'sans-serif'}}>
+        <div style={{ fontFamily: 'sans-serif' }}>
           <div
             style={{
               margin: 20,
@@ -36,10 +36,14 @@ export default function App() {
             <br/>
             <Suspense fallback={<Spinner/>}>
 
-              <Routes>
-                <Route exact path='/' element={<HomePage/>}/>
-                <Route exact path='/about' element={<AboutPage/>}/>
-              </Routes>
+              <Switch>
+                <Route path="/about">
+                  <AboutPage />
+                </Route>
+                <Route path="/">
+                  <HomePage />
+                </Route>
+              </Switch>
 
             </Suspense>
           </div>

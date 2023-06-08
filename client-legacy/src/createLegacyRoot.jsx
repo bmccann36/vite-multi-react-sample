@@ -1,4 +1,5 @@
 import React from 'react';
+import * as ReactDomMount from 'react-dom/client';
 import ReactDOM from 'react-dom';
 import ThemeContext from '../../ThemeContext.jsx';
 
@@ -27,17 +28,17 @@ function Bridge({ children, context }) {
 
 
 export default function createLegacyRoot(container) {
+  const root = ReactDomMount.createRoot(container);
   return {
     render(Component, props, context) {
-      ReactDOM.render(
+      root.render(
         <Bridge context={context}>
           <Component {...props} />
-        </Bridge>,
-        container
+        </Bridge>
       );
     },
     unmount() {
-      ReactDOM.unmountComponentAtNode(container);
+      root.unmount()
     },
   };
 }

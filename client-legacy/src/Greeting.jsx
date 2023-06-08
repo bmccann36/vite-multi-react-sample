@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-
-import ThemeContext from '../../ThemeContext.jsx';
 // import Clock from './shared/Clock';
 import { store } from '../../store.js';
-import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 store.subscribe(() => {
   console.log('Counter:', store.getState());
 });
+
+import ThemeContext from '../../ThemeContext';
 
 class AboutSection extends Component {
   componentDidMount() {
@@ -22,9 +21,26 @@ class AboutSection extends Component {
 
   render() {
     return (
-      <>
-        <h3>THIS IS A LEGACY COMPONENT</h3>
-      </>
+      <ThemeContext.Consumer>
+        {theme => (
+          <div style={{ border: '1px dashed black', padding: 20 }}>
+            <h3>src/legacy/Greeting.js</h3>
+            <h4 style={{ color: theme }}>
+              This component is rendered by the nested React ({React.version}).
+            </h4>
+            {/*<Clock />*/}
+            <p>
+              Counter: {this.props.counter}{' '}
+              <button onClick={() => this.props.dispatch({ type: 'increment' })}>
+                +
+              </button>
+            </p>
+            <b>
+              <Link to="/">Go to Home</Link>
+            </b>
+          </div>
+        )}
+      </ThemeContext.Consumer>
     );
   }
 }
