@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React from 'react_v16';
 import { useContext, useMemo, useRef, useLayoutEffect } from 'react';
 import { __RouterContext } from 'react-router';
 import { ReactReduxContext } from 'react-redux';
@@ -80,7 +80,6 @@ function readModule(record, pendingModuleImport) {
       resolvedImport => {
         console.log('resolved async import', resolvedImport);
         if (record.status === 'pending') {
-          console.log('is pending')
           record.status = 'fulfilled';
           record.promise = null;
           record.result = resolvedImport;

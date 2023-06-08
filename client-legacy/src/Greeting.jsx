@@ -1,24 +1,25 @@
-import React, { Component } from 'react';
-import { findDOMNode } from 'react-dom';
-import { connect } from 'react-redux';
-// import Clock from './shared/Clock';
+
+
+import React from 'react_v16';
+import { Component } from 'react_v16';
+import { findDOMNode } from 'react-dom_v16';
+import { connect } from 'react-redux_v4';
 import { store } from '../../store.js';
+
+import ThemeContext from '../../ThemeContext';
 import { Link } from 'react-router-dom';
+// import Clock from './shared/Clock';
 
 store.subscribe(() => {
   console.log('Counter:', store.getState());
 });
 
-import ThemeContext from '../../ThemeContext';
-
 class AboutSection extends Component {
   componentDidMount() {
     // The modern app is wrapped in StrictMode,
     // but the legacy bits can still use old APIs.
-    // eslint-disable-next-line react/no-find-dom-node
     findDOMNode(this);
   }
-
   render() {
     return (
       <ThemeContext.Consumer>
@@ -44,7 +45,6 @@ class AboutSection extends Component {
     );
   }
 }
-
 
 function mapStateToProps(state) {
   return { counter: state };

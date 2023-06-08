@@ -1,18 +1,13 @@
-/**
- * Copyright (c) Facebook, Inc. and its affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
 
-import {createStore} from 'redux';
+
+import { createStore } from 'redux';
 
 function reducer(state = 0, action) {
   switch (action.type) {
-    case 'increment':
-      return state + 1;
-    default:
-      return state;
+  case 'increment':
+    return state + 1;
+  default:
+    return state;
   }
 }
 

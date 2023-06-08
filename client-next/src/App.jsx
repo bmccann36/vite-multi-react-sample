@@ -2,9 +2,6 @@ import React, { Suspense, useState } from 'react';
 
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
-
-// import HomePage from './HomePage';
-// import AboutPage from './AboutPage';
 import ThemeContext from '../../ThemeContext.jsx';
 import HomePage from './HomePage.jsx';
 import AboutPage from './AboutPage.jsx';

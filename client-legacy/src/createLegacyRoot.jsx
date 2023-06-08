@@ -1,12 +1,13 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
+
+
+import React from 'react_v16';
+import ReactDOM from 'react-dom_v16';
 import ThemeContext from '../../ThemeContext.jsx';
 
 // Note: this is a semi-private API, but it's ok to use it
 // if we never inspect the values, and only pass them through.
 import { __RouterContext } from 'react-router';
-import { Provider } from 'react-redux';
-import PropTypes from 'prop-types';
+import { Provider } from 'react-redux_v4';
 
 // Pass through every context required by this tree.
 // The context object is populated in src/modern/withLegacyRoot.
@@ -25,34 +26,18 @@ function Bridge({ children, context }) {
   );
 }
 
-Bridge.propTypes = {
-  children: PropTypes.node.isRequired,
-  context: PropTypes.shape({
-    theme: PropTypes.string.isRequired,
-    router: PropTypes.object.isRequired,
-    reactRedux: PropTypes.shape({
-      store: PropTypes.object.isRequired,
-    }).isRequired,
-  }).isRequired,
-};
-
-
 export default function createLegacyRoot(container) {
-  const root = ReactDOM.createRoot(container);
   return {
     render(Component, props, context) {
-      root.render(
+      ReactDOM.render(
         <Bridge context={context}>
           <Component {...props} />
-        </Bridge>
+        </Bridge>,
+        container
       );
     },
     unmount() {
-      // wrap in setTimeout to avoid warning about unmounting during render
-      setTimeout(() => {
-        console.log('component unmount');
-        root.unmount();
-      });
+      ReactDOM.unmountComponentAtNode(container);
     },
   };
 }
