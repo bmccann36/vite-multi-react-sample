@@ -4,8 +4,9 @@ import ThemeContext from '../../ThemeContext.jsx';
 
 // Note: this is a semi-private API, but it's ok to use it
 // if we never inspect the values, and only pass them through.
-import {__RouterContext} from 'react-router';
-import {Provider} from 'react-redux';
+import { __RouterContext } from 'react-router';
+import { Provider } from 'react-redux';
+import PropTypes from 'prop-types';
 
 // Pass through every context required by this tree.
 // The context object is populated in src/modern/withLegacyRoot.
@@ -24,6 +25,16 @@ function Bridge({ children, context }) {
   );
 }
 
+Bridge.propTypes = {
+  children: PropTypes.node.isRequired,
+  context: PropTypes.shape({
+    theme: PropTypes.string.isRequired,
+    router: PropTypes.object.isRequired,
+    reactRedux: PropTypes.shape({
+      store: PropTypes.object.isRequired,
+    }).isRequired,
+  }).isRequired,
+};
 
 
 export default function createLegacyRoot(container) {
@@ -37,7 +48,11 @@ export default function createLegacyRoot(container) {
       );
     },
     unmount() {
-      root.unmount()
+      // wrap in setTimeout to avoid warning about unmounting during render
+      setTimeout(() => {
+        console.log('component unmount');
+        root.unmount();
+      });
     },
   };
 }
