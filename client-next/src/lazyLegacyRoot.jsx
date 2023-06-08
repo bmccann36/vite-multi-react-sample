@@ -32,9 +32,6 @@ export default function lazyLegacyRoot(getLegacyComponent) {
     ).default;
 
     const Component = readModule(componentModule, getLegacyComponent).default;
-    // console.log(Component)
-    // console.log('>>createLegacyRoot', createLegacyRoot)
-
     const containerRef = useRef(null);
     const rootRef = useRef(null);
 
@@ -86,17 +83,16 @@ function readModule(record, pendingModuleImport) {
   }
   if (!record.promise) {
     record.promise = pendingModuleImport().then(
-      value => {
-        console.log('>>value', value);
+      resolvedImport => {
+        console.log('resolved async import', resolvedImport);
         if (record.status === 'pending') {
           console.log('is pending')
           record.status = 'fulfilled';
           record.promise = null;
-          record.result = value;
+          record.result = resolvedImport;
         }
       },
       error => {
-        console.log('in error handler')
         if (record.status === 'pending') {
           record.status = 'rejected';
           record.promise = null;
