@@ -1,12 +1,11 @@
 import React from 'react';
-import * as ReactDomMount from 'react-dom/client';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
 import ThemeContext from '../../ThemeContext.jsx';
 
 // Note: this is a semi-private API, but it's ok to use it
 // if we never inspect the values, and only pass them through.
-import { __RouterContext } from 'react-router';
-import { Provider } from 'react-redux';
+import {__RouterContext} from 'react-router';
+import {Provider} from 'react-redux';
 
 // Pass through every context required by this tree.
 // The context object is populated in src/modern/withLegacyRoot.
@@ -28,7 +27,7 @@ function Bridge({ children, context }) {
 
 
 export default function createLegacyRoot(container) {
-  const root = ReactDomMount.createRoot(container);
+  const root = ReactDOM.createRoot(container);
   return {
     render(Component, props, context) {
       root.render(
