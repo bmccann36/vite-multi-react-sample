@@ -1,0 +1,1 @@
+import '@greenspark/client-next';

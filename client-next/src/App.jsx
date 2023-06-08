@@ -5,8 +5,9 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 
 // import HomePage from './HomePage';
 // import AboutPage from './AboutPage';
-import ThemeContext from './ThemeContext';
+import ThemeContext from '../../ThemeContext.jsx';
 import HomePage from "./HomePage.jsx";
+import AboutPage from "./AboutPage.jsx";
 
 
 export default function App() {
@@ -37,6 +38,7 @@ export default function App() {
 
               <Routes>
                 <Route exact path='/' element={<HomePage/>}/>
+                <Route exact path='/about' element={<AboutPage/>}/>
               </Routes>
 
             </Suspense>
